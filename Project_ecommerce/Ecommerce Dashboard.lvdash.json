@@ -1,0 +1,677 @@
+{
+  "datasets": [
+    {
+      "name": "6897fe78",
+      "displayName": "fact_transactions_denorm",
+      "config": {
+        "version": "1.1",
+        "source": "ecommerce.gold.fact_transactions_denorm",
+        "dimensions": [
+          {
+            "name": "date_id",
+            "expr": "source.date_id",
+            "displayName": "Date Id"
+          },
+          {
+            "name": "transaction_date",
+            "expr": "source.transaction_date",
+            "displayName": "Transaction Date"
+          },
+          {
+            "name": "transaction_ts",
+            "expr": "source.transaction_ts",
+            "displayName": "Transaction Ts"
+          },
+          {
+            "name": "transaction_id",
+            "expr": "source.transaction_id",
+            "displayName": "Transaction Id"
+          },
+          {
+            "name": "customer_id",
+            "expr": "source.customer_id",
+            "displayName": "Customer Id"
+          },
+          {
+            "name": "seq_no",
+            "expr": "source.seq_no",
+            "displayName": "Seq No"
+          },
+          {
+            "name": "product_id",
+            "expr": "source.product_id",
+            "displayName": "Product Id"
+          },
+          {
+            "name": "channel",
+            "expr": "source.channel",
+            "displayName": "Channel"
+          },
+          {
+            "name": "coupon_code",
+            "expr": "source.coupon_code",
+            "displayName": "Coupon Code"
+          },
+          {
+            "name": "coupon_flag",
+            "expr": "source.coupon_flag",
+            "displayName": "Coupon Flag"
+          },
+          {
+            "name": "unit_price_currency",
+            "expr": "source.unit_price_currency",
+            "displayName": "Unit Price Currency"
+          },
+          {
+            "name": "quantity",
+            "expr": "source.quantity",
+            "displayName": "Quantity"
+          },
+          {
+            "name": "unit_price",
+            "expr": "source.unit_price",
+            "displayName": "Unit Price"
+          },
+          {
+            "name": "gross_amount",
+            "expr": "source.gross_amount",
+            "displayName": "Gross Amount"
+          },
+          {
+            "name": "discount_percent",
+            "expr": "source.discount_percent",
+            "displayName": "Discount Percent"
+          },
+          {
+            "name": "discount_amount",
+            "expr": "source.discount_amount",
+            "displayName": "Discount Amount"
+          },
+          {
+            "name": "tax_amount",
+            "expr": "source.tax_amount",
+            "displayName": "Tax Amount"
+          },
+          {
+            "name": "net_amount",
+            "expr": "source.net_amount",
+            "displayName": "Net Amount"
+          },
+          {
+            "name": "net_amount_inr",
+            "expr": "source.net_amount_inr",
+            "displayName": "Net Amount Inr"
+          },
+          {
+            "name": "year",
+            "expr": "source.year",
+            "displayName": "Year"
+          },
+          {
+            "name": "month_name",
+            "expr": "source.month_name",
+            "displayName": "Month Name"
+          },
+          {
+            "name": "day_name",
+            "expr": "source.day_name",
+            "displayName": "Day Name"
+          },
+          {
+            "name": "is_weekend",
+            "expr": "source.is_weekend",
+            "displayName": "Is Weekend"
+          },
+          {
+            "name": "quarter",
+            "expr": "source.quarter",
+            "displayName": "Quarter"
+          },
+          {
+            "name": "week",
+            "expr": "source.week",
+            "displayName": "Week"
+          },
+          {
+            "name": "sku",
+            "expr": "source.sku",
+            "displayName": "Sku"
+          },
+          {
+            "name": "category_code",
+            "expr": "source.category_code",
+            "displayName": "Category Code"
+          },
+          {
+            "name": "category_name",
+            "expr": "source.category_name",
+            "displayName": "Category Name"
+          },
+          {
+            "name": "brand_code",
+            "expr": "source.brand_code",
+            "displayName": "Brand Code"
+          },
+          {
+            "name": "brand_name",
+            "expr": "source.brand_name",
+            "displayName": "Brand Name"
+          },
+          {
+            "name": "color",
+            "expr": "source.color",
+            "displayName": "Color"
+          },
+          {
+            "name": "size",
+            "expr": "source.size",
+            "displayName": "Size"
+          },
+          {
+            "name": "rating_count",
+            "expr": "source.rating_count",
+            "displayName": "Rating Count"
+          },
+          {
+            "name": "hour_of_day",
+            "expr": "source.hour_of_day",
+            "displayName": "Hour Of Day"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "b43b029b",
+      "displayName": "Sales",
+      "layout": [
+        {
+          "widget": {
+            "name": "ac884cf0",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Sales Insights"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "0101078e",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6897fe78",
+                  "fields": [
+                    {
+                      "name": "monthly(transaction_date)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `transaction_date`)"
+                    },
+                    {
+                      "name": "sum(net_amount)",
+                      "expression": "SUM(`net_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Monthly Sales Trend",
+                "showTitle": true
+              },
+              "mark": {
+                "opacity": 1
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(transaction_date)",
+                  "displayName": "Month",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(net_amount)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  },
+                  "displayName": "Total Sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "03d01773",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6897fe78",
+                  "fields": [
+                    {
+                      "name": "category_name",
+                      "expression": "`category_name`"
+                    },
+                    {
+                      "name": "sum(net_amount)",
+                      "expression": "SUM(`net_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Sales by Product Category",
+                "showTitle": true
+              },
+              "mark": {
+                "opacity": 1
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "category_name",
+                  "displayName": "Product Category",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(net_amount)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  },
+                  "displayName": "Total Sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 1,
+            "width": 6,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "3cc1fe02",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6897fe78",
+                  "fields": [
+                    {
+                      "name": "sum(net_amount)",
+                      "expression": "SUM(`net_amount`)"
+                    },
+                    {
+                      "name": "day_name",
+                      "expression": "`day_name`"
+                    },
+                    {
+                      "name": "month_name",
+                      "expression": "`month_name`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Sales Heatmap by Day and Month",
+                "showTitle": true
+              },
+              "mark": {
+                "opacity": 1
+              },
+              "widgetType": "heatmap",
+              "encodings": {
+                "x": {
+                  "fieldName": "day_name",
+                  "displayName": "Day of Week",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "month_name",
+                  "displayName": "Month",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "color": {
+                  "fieldName": "sum(net_amount)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "displayName": "Total Sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 12,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "254cb0e5",
+      "displayName": "Marketing",
+      "layout": [
+        {
+          "widget": {
+            "name": "fbd3aefd",
+            "multilineTextboxSpec": {
+              "lines": [
+                "### Marketing insights"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 11,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "31714d72",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6897fe78",
+                  "fields": [
+                    {
+                      "name": "channel",
+                      "expression": "`channel`"
+                    },
+                    {
+                      "name": "monthly(transaction_date)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `transaction_date`)"
+                    },
+                    {
+                      "name": "sum(net_amount)",
+                      "expression": "SUM(`net_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Sales by Marketing Channel Over Time",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "opacity": 1
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(transaction_date)",
+                  "displayName": "Month",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(net_amount)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 2
+                    }
+                  },
+                  "displayName": "Total Sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "channel",
+                  "displayName": "Channel",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 7,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "eb66dec3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6897fe78",
+                  "fields": [
+                    {
+                      "name": "channel",
+                      "expression": "`channel`"
+                    },
+                    {
+                      "name": "countdistinct(customer_id)",
+                      "expression": "COUNT(DISTINCT `customer_id`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Customer Count by Channel",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "opacity": 1
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "channel",
+                  "displayName": "Marketing Channel",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "countdistinct(customer_id)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "compact",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "displayName": "Unique Customers",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 7,
+            "y": 1,
+            "width": 5,
+            "height": 5
+          }
+        },
+        {
+          "widget": {
+            "name": "f7667310",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6897fe78",
+                  "fields": [
+                    {
+                      "name": "channel",
+                      "expression": "`channel`"
+                    },
+                    {
+                      "name": "category_name",
+                      "expression": "`category_name`"
+                    },
+                    {
+                      "name": "sum(net_amount)",
+                      "expression": "SUM(`net_amount`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "title": "Top Categories by Channel",
+                "showTitle": true
+              },
+              "version": 3,
+              "mark": {
+                "opacity": 1,
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "category_name",
+                  "displayName": "Product Category",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(net_amount)",
+                  "format": {
+                    "type": "number-currency",
+                    "abbreviation": "compact",
+                    "currencyCode": "USD",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 1
+                    }
+                  },
+                  "displayName": "Total Sales",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "channel",
+                  "displayName": "Channel",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 12,
+            "height": 5
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
