@@ -21,6 +21,7 @@ Dimension data (descriptive information like products and customers)
 Fact data (transactions like orders and sales)
 
 4. Step-by-Step Pipeline Explanation
+
 Step 1: Environment Setup
 File: setup_catalog.ipynb
 This is where the system is initialized.
@@ -36,6 +37,7 @@ Environment setup in Databricks
 
 6. Dimension Data Pipeline 
 This pipeline handles data that describes the business.
+
 Step 2: Raw Dimension Data
 File: 1_dim_bronze.ipynb
 What I did:
@@ -44,6 +46,8 @@ Stored it without modifying it
 Why this matters:
 Keeps a reliable copy of the original data
 Allows reprocessing if needed
+
+
 Skill demonstrated:
 Data ingestion
 Handling raw datasets
@@ -60,6 +64,7 @@ Skill demonstrated:
 Data cleaning
 Data quality handling
 Transformation logic
+
 Step 4: Business-Ready Dimension Data
 File: 3_dim_gold.ipynb
 What I did:
@@ -76,6 +81,7 @@ Designing dimension tables
 
 7. Fact Data Pipeline (Transactional Data)
 This is the most critical part because it represents actual business activity.
+
 Step 5: Raw Transaction Data
 File: 1_fact_bronze.ipynb
 What I did:
@@ -83,6 +89,7 @@ Loaded raw transaction data (orders and order items)
 Stored it without changes
 Why this matters:
 Preserves original transaction records for traceability.
+
 Step 6: Cleaned Transaction Data
 File: 2_fact_silver.ipynb
 What I did:
@@ -94,6 +101,7 @@ Accurate transaction data is essential for correct reporting.
 Skill demonstrated:
 Data validation
 Data consistency checks
+
 Step 7: Business-Ready Transaction Data
 File: 3_fact_gold.ipynb
 
@@ -108,6 +116,7 @@ This step transforms raw events into meaningful business records.
 Skill demonstrated:
 Fact table design
 Data integration
+
 7. Final Dataset for Reporting
 
 This file defines the final dataset used in dashboards.
